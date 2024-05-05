@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.likelion.productproject.domain.Product;
-import org.likelion.productproject.domain.ProductReposityory;
+import org.likelion.productproject.domain.ProductRepository;
 import org.likelion.productproject.dto.ProductResponseDto;
 import org.likelion.productproject.dto.ProductSaveRequestDto;
 import org.likelion.productproject.dto.ProductUpdateRequestDto;
@@ -59,7 +59,7 @@ public class ProductControllerTest {
     ProductService productService;
 
     @Autowired
-    ProductReposityory productReposityory;
+    ProductRepository productReposityory;
 
     @AfterEach // 각 테스트 종료 이후에 데이터베이스를 초기화
     public void afterEach() {
@@ -150,7 +150,8 @@ public class ProductControllerTest {
 
         Long updateId = savedStudent.getId();
         String newName = "뉴발란스 530";
-        Long newPrice = Long.valueOf("126000");
+        //Long newPrice = Long.valueOf("126000");
+        Long newPrice = 126000L;
 
         ProductUpdateRequestDto requestDto = ProductUpdateRequestDto.builder()
                 .name(newName)
@@ -175,11 +176,11 @@ public class ProductControllerTest {
 
     @Test
     @DisplayName("상품을 정상 삭제한다")
-    public void deleteStudent() throws Exception {
+    public void deleteProduct() throws Exception {
         // given
-        final Product savedStudent = productReposityory.save(PRODUCT_1);
+        final Product savedProduct = productReposityory.save(PRODUCT_1);
 
-        String url = "http://localhost:" + port + "/products/" + savedStudent.getId();
+        String url = "http://localhost:" + port + "/products/" + savedProduct.getId();
 
         // when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete(url)).andReturn();

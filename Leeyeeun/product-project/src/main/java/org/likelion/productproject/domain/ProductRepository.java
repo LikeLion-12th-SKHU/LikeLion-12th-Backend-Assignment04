@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @Repository
-public class ProductReposityory {
+public class ProductRepository {
     private static final Map<Long, Product> database = new HashMap<>();
 
     public Product save(Product product) {

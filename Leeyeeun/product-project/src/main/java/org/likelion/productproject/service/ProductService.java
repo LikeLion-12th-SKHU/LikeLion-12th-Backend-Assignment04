@@ -2,7 +2,7 @@ package org.likelion.productproject.service;
 
 import lombok.RequiredArgsConstructor;
 import org.likelion.productproject.domain.Product;
-import org.likelion.productproject.domain.ProductReposityory;
+import org.likelion.productproject.domain.ProductRepository;
 import org.likelion.productproject.dto.ProductResponseDto;
 import org.likelion.productproject.dto.ProductSaveRequestDto;
 import org.likelion.productproject.dto.ProductUpdateRequestDto;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
 
-    private final ProductReposityory productReposityory;
+    private final ProductRepository productRepository;
 
     private static Long sequence = 0L;
 
@@ -28,32 +28,32 @@ public class ProductService {
                 .price(requestDto.getPrice())
                 .build();
 
-        return productReposityory.save(product);
+        return productRepository.save(product);
     }
 
     public ProductResponseDto findProductById(Long id) {
-        Product product = productReposityory.findById(id)
+        Product product = productRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("해당하는 상품이 없습니다. id = " + id));
 
         return ProductResponseDto.from(product);
     }
 
     public List<ProductResponseDto> findAllProduct() {
-        return productReposityory.findAll().stream()
+        return productRepository.findAll().stream()
                 .map(ProductResponseDto::from)
                 .collect(Collectors.toList());
     }
 
     public Product updateProductById(Long id, ProductUpdateRequestDto requestDto) {
-        Product product = productReposityory.findById(id)
+        Product product = productRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("해당하는 상품이 없습니다. id = " + id));
 
         product.update(requestDto.getName(), requestDto.getPrice());
 
-        return productReposityory.save(product);
+        return productRepository.save(product);
     }
 
     public void deleteProductById(Long id) {
-        productReposityory.deleteById(id);
+        productRepository.deleteById(id);
     }
 }
