@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 public class ProductUpdateRequestDto {
 
     private String name;
-    private long price;
-
+    private Long price;
+    // 테스트 코드 long 때매 오류난 거 아님
     @Builder
-    public ProductUpdateRequestDto(String name, long price) {
+    public ProductUpdateRequestDto(String name, Long price) {
         this.name = name;
         this.price = price;
     }

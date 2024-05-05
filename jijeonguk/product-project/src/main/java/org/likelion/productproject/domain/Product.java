@@ -13,7 +13,8 @@ public class Product { //강의자료에서 왜 래퍼 클래스인지 질문
     private String name;
     private Long price;
 
-    @Builder
+    //Builder개념 이해하기
+    @Builder //수현님 가이드라인 @Builder없이 만약 파라미터의 개수가 늘어난다면 어떤점이 불편할까
     public Product(Long id, Long product_id, String name, Long price) {
         this.id = id;
         this.product_id = product_id;
