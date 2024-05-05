@@ -8,13 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Product {
 
+    private String name;        //상품의 이름
     private Long id;            //상품의 아이디
     private Long productId;     //상품 일련번호
     private Long price;         //상품의 가격
-    private String name;        //상품의 이름
 
     @Builder // 3
-    public Product(String name,Long id, Long productId, Long price){
+    public Product(String name, Long id, Long productId, Long price){
         this.name = name;
         this.id = id;
         this.productId = productId;

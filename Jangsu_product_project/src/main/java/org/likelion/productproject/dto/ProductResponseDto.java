@@ -16,7 +16,7 @@ public class ProductResponseDto {
     private Long productId;     //상품 일련번호
     private Long price;         //상품의 가격
 
-    public static ProductResponseDto from (Product product) {
+    public static ProductResponseDto from(Product product) {
         return new ProductResponseDto(product.getName() ,product.getId(), product.getProductId(),
                 product.getPrice());
     }

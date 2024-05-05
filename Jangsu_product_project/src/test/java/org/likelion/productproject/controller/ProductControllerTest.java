@@ -100,9 +100,9 @@ public class ProductControllerTest {
         );
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
 
+        assertThat(productResponse.getName()).isEqualTo(PRODUCT2.getName());
         assertThat(productResponse.getProductId()).isEqualTo(PRODUCT2.getProductId());
         assertThat(productResponse.getPrice()).isEqualTo(PRODUCT2.getPrice());
-        assertThat(productResponse.getName()).isEqualTo(PRODUCT2.getName());
     }
 
     @Test
@@ -125,7 +125,7 @@ public class ProductControllerTest {
         );
 
         List<ProductResponseDto> expectedResponses = productService.findAllProduct();
-        assertThat(actualResponses).usingRecursiveAssertion().isEqualTo(expectedResponses);
+        assertThat(actualResponses).usingRecursiveComparison().isEqualTo(expectedResponses);
     }
 
     @Test

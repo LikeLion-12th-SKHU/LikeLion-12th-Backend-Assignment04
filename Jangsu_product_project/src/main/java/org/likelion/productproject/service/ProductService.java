@@ -29,7 +29,7 @@ public class ProductService {
 
     public ProductResponseDto findProductById(Long id) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 학생이 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 물품이 없습니다."));
 
         return ProductResponseDto.from(product);
     }
@@ -41,7 +41,7 @@ public class ProductService {
 
     public Product updateProductById(Long id, ProductUpdateRequestDto requestDto) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당하는 학생이 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 물품이 없습니다."));
 
         product.updateProduct(requestDto.getName(), requestDto.getPrice());
 
