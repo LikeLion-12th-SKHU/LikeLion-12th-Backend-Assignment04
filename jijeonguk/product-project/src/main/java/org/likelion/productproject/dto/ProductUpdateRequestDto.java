@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class ProductUpdateRequestDto {
+
     private String name;
-    private Long price;
+    private long price;
 
     @Builder
-    public ProductUpdateRequestDto(String name, Long price) {
+    public ProductUpdateRequestDto(String name, long price) {
         this.name = name;
         this.price = price;
     }
