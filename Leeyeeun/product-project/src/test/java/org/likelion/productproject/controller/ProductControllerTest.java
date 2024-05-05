@@ -59,16 +59,16 @@ public class ProductControllerTest {
     ProductService productService;
 
     @Autowired
-    ProductRepository productReposityory;
+    ProductRepository productRepository;
 
     @AfterEach // 각 테스트 종료 이후에 데이터베이스를 초기화
     public void afterEach() {
-        productReposityory.clear();
+        productRepository.clear();
     }
 
     @Test
     @DisplayName("상품을 정상 저장한다")
-    public void saveStudent() throws Exception {
+    public void saveProduct() throws Exception {
         // given
         final ProductSaveRequestDto requestDto = ProductSaveRequestDto.builder()
                 .productId(PRODUCT_1.getProductId())
@@ -87,7 +87,7 @@ public class ProductControllerTest {
         // then
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        List<Product> all = productReposityory.findAll();
+        List<Product> all = productRepository.findAll();
         assertThat(all.get(0).getProductId()).isEqualTo(PRODUCT_1.getProductId());
         assertThat(all.get(0).getName()).isEqualTo(PRODUCT_1.getName());
         assertThat(all.get(0).getPrice()).isEqualTo(PRODUCT_1.getPrice());
@@ -95,9 +95,9 @@ public class ProductControllerTest {
 
     @Test
     @DisplayName("상품을 정상 조회한다")
-    public void getStudent() throws Exception {
+    public void getProduct() throws Exception {
         // given
-        productReposityory.save(PRODUCT_2);
+        productRepository.save(PRODUCT_2);
 
         String url = "http://localhost:" + port + "/products/" + PRODUCT_2.getId();
 
@@ -105,7 +105,7 @@ public class ProductControllerTest {
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(url)).andReturn();
 
         // then
-        final ProductResponseDto studentResponse = objectMapper.readValue(
+        final ProductResponseDto productResponse = objectMapper.readValue(
                 mvcResult.getResponse().getContentAsString(),
                 new TypeReference<>() {
                 }
@@ -113,18 +113,18 @@ public class ProductControllerTest {
 
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        assertThat(studentResponse.getProductId()).isEqualTo(PRODUCT_2.getProductId());
-        assertThat(studentResponse.getName()).isEqualTo(PRODUCT_2.getName());
-        assertThat(studentResponse.getPrice()).isEqualTo(PRODUCT_2.getPrice());
+        assertThat(productResponse.getProductId()).isEqualTo(PRODUCT_2.getProductId());
+        assertThat(productResponse.getName()).isEqualTo(PRODUCT_2.getName());
+        assertThat(productResponse.getPrice()).isEqualTo(PRODUCT_2.getPrice());
     }
 
     @Test
     @DisplayName("상품 전체를 정상 조회한다")
-    public void getAllStudent() throws Exception {
+    public void getAllProduct() throws Exception {
         // given
-        productReposityory.save(PRODUCT_3);
-        productReposityory.save(PRODUCT_3);
-        productReposityory.save(PRODUCT_3);
+        productRepository.save(PRODUCT_3);
+        productRepository.save(PRODUCT_3);
+        productRepository.save(PRODUCT_3);
 
         String url = "http://localhost:" + port + "/products";
 
@@ -144,11 +144,11 @@ public class ProductControllerTest {
 
     @Test
     @DisplayName("상품을 정상 수정한다")
-    public void updateStudent() throws Exception {
+    public void updateProduct() throws Exception {
         // given
-        final Product savedStudent = productReposityory.save(PRODUCT_1);
+        final Product savedProduct = productRepository.save(PRODUCT_1);
 
-        Long updateId = savedStudent.getId();
+        Long updateId = savedProduct.getId();
         String newName = "뉴발란스 530";
         //Long newPrice = Long.valueOf("126000");
         Long newPrice = 126000L;
@@ -169,7 +169,7 @@ public class ProductControllerTest {
         // then
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        List<Product> all = productReposityory.findAll();
+        List<Product> all = productRepository.findAll();
         assertThat(all.get(0).getName()).isEqualTo(newName);
         assertThat(all.get(0).getPrice()).isEqualTo(newPrice);
     }
@@ -178,7 +178,7 @@ public class ProductControllerTest {
     @DisplayName("상품을 정상 삭제한다")
     public void deleteProduct() throws Exception {
         // given
-        final Product savedProduct = productReposityory.save(PRODUCT_1);
+        final Product savedProduct = productRepository.save(PRODUCT_1);
 
         String url = "http://localhost:" + port + "/products/" + savedProduct.getId();
 
@@ -188,7 +188,7 @@ public class ProductControllerTest {
         // then
         assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
 
-        List<Product> all = productReposityory.findAll();
+        List<Product> all = productRepository.findAll();
         assertThat(all.size()).isEqualTo(0);
     }
 
