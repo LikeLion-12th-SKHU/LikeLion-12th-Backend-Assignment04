@@ -16,7 +16,7 @@ public class ItemController {
 
     private final ItemService itemService;
 
-    @PostMapping("Item")
+    @PostMapping("item")
     public void save(@RequestBody ItemSaveRequestDto requestDto) {
         itemService.saveItem(requestDto);
     }
@@ -26,11 +26,10 @@ public class ItemController {
         return itemService.findItemById(id);
     }
 
-    @GetMapping("Item")
+    @GetMapping("item")
     public List<ItemResponseDto> findAllItem() {
         return itemService.findAllItem();
     }
-
     @PatchMapping("item/{id}")
     public void updateItemById(@PathVariable Long id, @RequestBody ItemUpdateRequestDto requestDto) {
         itemService.updateItemById(id, requestDto);

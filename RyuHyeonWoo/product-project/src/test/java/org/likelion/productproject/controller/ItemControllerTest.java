@@ -76,7 +76,7 @@ public class ItemControllerTest {
                 .price(ITEM_1.getPrice())
                 .build();
 
-        String url = "http://localhost:"+ port + "/Item";
+        String url = "http://localhost:"+ port + "/item";
 
         // when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post(url)
@@ -95,11 +95,11 @@ public class ItemControllerTest {
 
     @Test
     @DisplayName("물품을 정상 조회한다")
-    public void getStudent() throws Exception {
+    public void getItem() throws Exception {
         // given
         itemRepository.save(ITEM_2);
 
-        String url = "http://localhost:" + port + "/items/" + ITEM_2.getId();
+        String url = "http://localhost:" + port + "/item/" + ITEM_2.getId();
 
         // when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(url)).andReturn();
@@ -121,13 +121,13 @@ public class ItemControllerTest {
 
     @Test
     @DisplayName("물품 전체를 정상 조회한다")
-    public void getAllItem() throws Exception {
+    public void getAllItems() throws Exception {
         // given
         itemRepository.save(ITEM_1);
         itemRepository.save(ITEM_2);
         itemRepository.save(ITEM_3);
 
-        String url = "http://localhost:" + port + "/items";
+        String url = "http://localhost:" + port + "/item";
 
         // when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(url)).andReturn();
@@ -141,6 +141,7 @@ public class ItemControllerTest {
 
         List<ItemResponseDto> expectedResponses = itemService.findAllItem();
 
+        assertThat(mvcResult.getResponse().getStatus()).isEqualTo(HttpStatus.OK.value());
         assertThat(actualResponses).usingRecursiveComparison().isEqualTo(expectedResponses);
     }
 
@@ -159,7 +160,7 @@ public class ItemControllerTest {
                 .price(newPrice)
                 .build();
 
-        String url = "http://localhost:" + port + "/items/" + updateId;
+        String url = "http://localhost:" + port + "/item/" + updateId;
 
         // when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.patch(url)
