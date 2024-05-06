@@ -11,15 +11,10 @@ public class ProductSaveRequestDto {
     private Long productSerialNumber;
     private Long productPrice;
     private String productName;
-
+    @Builder
     public ProductSaveRequestDto(Long productSerialNumber, Long productPrice, String productName) {
         this.productSerialNumber = productSerialNumber;
         this.productPrice = productPrice;
         this.productName = productName;
-    }
-
-
-    public static Object builder() {
-        return 0;
     }
 }
