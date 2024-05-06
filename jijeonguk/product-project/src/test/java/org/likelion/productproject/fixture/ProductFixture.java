@@ -11,13 +11,13 @@ public class ProductFixture {
             1800L
     );
     public static final Product PRODUCT_2 = new Product(
-            1L,
+            2L,
             20240002L,
             "사이다",
             1500L
     );
     public static final Product PRODUCT_3 = new Product(
-            1L,
+            3L,
             20240003L,
             "환타",
             1400L
