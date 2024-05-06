@@ -13,18 +13,15 @@ public class Product {
     private String productName;
 
     @Builder
-    public Product(Long productId, Long productSerialNumber, Long productPrice, String productName){
+    public Product(Long productId, Long productSerialNumber, Long productPrice, String productName) {
         this.productId = productId;
         this.productSerialNumber = productSerialNumber;
         this.productPrice = productPrice;
         this.productName = productName;
     }
 
-
-
-    public void register(Long productSerialNumber, Long productPrice, String productName){
-        this.productSerialNumber = productSerialNumber;
-        this.productPrice = productPrice;
+    public void register(String productName, Long productPrice) {
         this.productName = productName;
+        this.productPrice = productPrice;
     }
 }

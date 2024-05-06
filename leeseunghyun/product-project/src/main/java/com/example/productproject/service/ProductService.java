@@ -9,7 +9,8 @@ import com.example.productproject.dto.ProductSaveRequestDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +47,7 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 상품이 없습니다. id = " + id));
 
-        product.update(requestDto.getProductName(), requestDto.getPrice());
+        product.register(requestDto.getProductName(), requestDto.getProductPrice());
 
         return productRepository.save(product);
     }
